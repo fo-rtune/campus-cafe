@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse our delicious menu at Campus Cafe. From breakfast to dinner, we have options for every appetite.">
+    <meta name="keywords" content="campus cafe menu, student dining, college food, breakfast, lunch, dinner, snacks">
+    <meta name="author" content="Campus Cafe">
+    <title>Menu - Campus Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="icon1.png" type="image/png">
+</head>
+<body class="light-mode">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.png" alt="Campus Cafe Logo">
+                    <span>Campus Cafe</span>
+                </a>
+            </div>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html" class="active">Menu</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="my-orders.html">My Orders</a></li>
+                </ul>
+                <div class="mobile-nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-badge" class="cart-badge">0</span>
+                </a>
+                <button class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="menu-header">
+            <div class="container">
+                <h1>Our Menu</h1>
+                <p>Delicious and affordable options to fuel your day on campus</p>
+                
+                <div class="search-container">
+                    <input type="text" id="menu-search" placeholder="Search our menu...">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="menu-tabs">
+                    <button class="menu-tab active" data-category="all">All</button>
+                    <button class="menu-tab" data-category="appetizers">Breakfast</button>
+                    <button class="menu-tab" data-category="main-courses">Main Courses</button>
+                    <button class="menu-tab" data-category="desserts">Desserts</button>
+                    <button class="menu-tab" data-category="drinks">Drinks</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="menu-items">
+            <div class="container">
+                <div class="no-results" style="display: none;">
+                    <i class="fas fa-search"></i>
+                    <h2>No menu items found</h2>
+                    <p>Please try a different search term or category</p>
+                </div>
+                
+                <div class="menu-grid" id="menu-container">
+                    <!-- Menu items will be loaded dynamically -->
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="order-section">
+            <div class="container">
+                <h2>Current Orders</h2>
+                <p>Check your order status or call us at 0712345678</p>
+                <div id="current-orders" class="current-orders">
+                    <!-- Current orders will be loaded dynamically if available -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/logo.png" alt="Campus Cafe Logo">
+                    <span>Campus Cafe</span>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="my-orders.html">My Orders</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-stats">
+                    <h3>Our Impact</h3>
+                    <ul class="stats-list">
+                        <li><span id="customers-today">0</span> customers served today</li>
+                        <li><span id="customers-total">0</span> happy customers since 2021</li>
+                        <li><span id="orders-count">0</span> orders submitted</li>
+                    </ul>
+                </div>
+                <div class="footer-admin">
+                    <a href="admin/login.html" class="btn btn-small">Admin Login</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Campus Cafe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Item Detail Modal -->
+    <div id="item-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body">
+                <h2 id="modal-item-name"></h2>
+                <div class="modal-item-details">
+                    <div class="modal-item-image" id="modal-item-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                    </div>
+                    <div class="modal-item-info">
+                        <p id="modal-item-description"></p>
+                        <div class="modal-item-price" id="modal-item-price"></div>
+                        <div class="modal-item-category" id="modal-item-category"></div>
+                        <div class="modal-item-ingredients">
+                            <h3>Ingredients</h3>
+                            <ul id="modal-item-ingredients"></ul>
+                        </div>
+                        <div class="modal-item-actions">
+                            <button id="order-item-btn" class="btn btn-primary">
+                                <i class="fas fa-shopping-cart"></i> Place Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order Confirmation Modal -->
+    <div id="order-confirmation-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body text-center">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2>Order Placed Successfully!</h2>
+                <p>Your order has been placed and will be ready soon.</p>
+                <p>Order #: <span id="order-number"></span></p>
+                <button id="close-confirmation" class="btn btn-primary">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils/theme.js"></script>
+    <script src="js/utils/storage.js"></script>
+    <script src="js/utils/stats.js"></script>
+    <script>
+        // Update the cart badge on page load and periodically
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update cart badge immediately
+            updateCartBadgeGlobal();
+            
+            // Update cart badge periodically to ensure it stays updated
+            setInterval(updateCartBadgeGlobal, 2000);
+            
+            // Function to update the cart badge
+            function updateCartBadgeGlobal() {
+                const cartBadge = document.getElementById('cart-badge');
+                if (!cartBadge) return;
+                
+                // Get the total items from cartManager
+                const totalItems = cartManager.getTotalItems();
+                
+                // Update the badge
+                cartBadge.textContent = totalItems;
+                
+                // Show or hide badge based on cart contents
+                if (totalItems > 0) {
+                    cartBadge.style.display = 'flex';
+                } else {
+                    cartBadge.style.display = 'none';
+                }
+            }
+            
+            // Also update the badge when the storage changes (helps with syncing across tabs)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'campus_cafe_cart') {
+                    updateCartBadgeGlobal();
+                }
+            });
+        });
+    </script>
+    <script src="js/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details - Campus Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="icon1.png" type="image/png">
+    <style>
+        /* Order Details Styles */
+        .order-details-container {
+            margin: 2rem 0;
+        }
+        
+        .order-details-card {
+            background-color: var(--background-color);
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .order-header h2 {
+            margin: 0;
+        }
+        
+        .order-status {
+            padding: 0.5rem 1rem;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+        
+        .status-pending {
+            background-color: #fcf8e3;
+            color: #8a6d3b;
+        }
+        
+        .status-ready {
+            background-color: #d9edf7;
+            color: #31708f;
+        }
+        
+        .status-completed {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        
+        .status-cancelled {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+        
+        .order-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .order-info {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .order-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .order-item-image {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 1rem;
+        }
+        
+        .order-item-details h3 {
+            margin: 0 0 0.5rem;
+        }
+        
+        .order-meta h3 {
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+        }
+        
+        .order-meta p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .customer-info, .payment-info, .order-timing, .order-notes {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: var(--background-secondary);
+            border-radius: var(--border-radius);
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .payment-info {
+            border-left-color: var(--kenya-green);
+        }
+        
+        .order-timing {
+            border-left-color: var(--kenya-orange);
+        }
+        
+        .order-notes {
+            border-left-color: var(--secondary-color);
+        }
+        
+        .customer-info h3, .payment-info h3, .order-timing h3, .order-notes h3 {
+            margin-top: 0;
+            color: var(--text-color);
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .order-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+        
+        /* Thank you modal */
+        .success-icon {
+            font-size: 3rem;
+            color: #28a745;
+            margin-bottom: 1rem;
+        }
+        
+        /* Message alert */
+        .message-alert {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .message-alert.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.png" alt="Campus Cafe Logo">
+                    <span>Campus Cafe</span>
+                </a>
+            </div>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="my-orders.html" class="active">My Orders</a></li>
+                </ul>
+                <div class="mobile-nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-badge" class="cart-badge">0</span>
+                </a>
+                <button class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-header small">
+            <div class="container">
+                <h1>Order Details</h1>
+                <div class="breadcrumbs">
+                    <a href="index.html">Home</a> / 
+                    <a href="menu.html">Menu</a> / 
+                    <span>Order Details</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="order-details-section">
+            <div class="container">
+                <button id="back-to-menu" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Menu
+                </button>
+                
+                <div id="order-details-container">
+                    <!-- Order details will be loaded dynamically -->
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Thank You Modal -->
+    <div id="thank-you-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-body text-center">
+                <i class="fas fa-check-circle success-icon"></i>
+                <h2>Thank You!</h2>
+                <p>Your order has been marked as completed.</p>
+                <p>We appreciate your business!</p>
+                <button id="thank-you-continue" class="btn btn-primary">Continue</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="assets/logo.png" alt="Campus Cafe Logo">
+                    <span>Campus Cafe</span>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="menu.html">Menu</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="my-orders.html">My Orders</a></li>
+                    </ul>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-stats">
+                    <h3>Our Impact</h3>
+                    <ul class="stats-list">
+                        <li><span id="customers-today">0</span> customers served today</li>
+                        <li><span id="customers-total">0</span> happy customers since 2021</li>
+                        <li><span id="orders-count">0</span> orders submitted</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Campus Cafe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/utils/theme.js"></script>
+    <script src="js/utils/storage.js"></script>
+    <script src="js/utils/stats.js"></script>
+    <script>
+        // Update the cart badge on page load and periodically
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update cart badge immediately
+            updateCartBadgeGlobal();
+            
+            // Update cart badge periodically to ensure it stays updated
+            setInterval(updateCartBadgeGlobal, 2000);
+            
+            // Function to update the cart badge
+            function updateCartBadgeGlobal() {
+                const cartBadge = document.getElementById('cart-badge');
+                if (!cartBadge) return;
+                
+                // Get the total items from cartManager
+                const totalItems = cartManager.getTotalItems();
+                
+                // Update the badge
+                cartBadge.textContent = totalItems;
+                
+                // Show or hide badge based on cart contents
+                if (totalItems > 0) {
+                    cartBadge.style.display = 'flex';
+                } else {
+                    cartBadge.style.display = 'none';
+                }
+            }
+            
+            // Also update the badge when the storage changes (helps with syncing across tabs)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'campus_cafe_cart') {
+                    updateCartBadgeGlobal();
+                }
+            });
+        });
+    </script>
+    <script src="js/order-details.js"></script>
+</body>
+</html> 

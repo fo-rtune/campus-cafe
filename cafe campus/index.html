@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Campus Cafe - Your favorite campus dining experience with delicious food options for students and faculty.">
+    <meta name="keywords" content="campus cafe, university restaurant, student dining, college food, cafe menu">
+    <meta name="author" content="Campus Cafe">
+    <title>Campus Cafe - Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="icon" href="icon1.png" type="image/png">
+</head>
+<body class="light-mode">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/logo.png" alt="Campus Cafe Logo">
+                    <span>Campus Cafe</span>
+                </a>
+            </div>
+            <nav>
+                <ul class="main-nav">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="my-orders.html">My Orders</a></li>
+                </ul>
+                <div class="mobile-nav-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+            <div class="nav-actions">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-badge" class="cart-badge">0</span>
+                </a>
+                <button class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Your Campus Dining Destination</h1>
+                    <p>Fresh, affordable, and delicious meals made specially for students and faculty</p>
+                    <a href="menu.html" class="btn btn-primary">View Our Menu</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="featured-dishes" id="featured">
+            <div class="container">
+                <h2>Featured Dishes</h2>
+                <div class="featured-grid" id="featured-dishes-container">
+                    <!-- Featured dishes will be loaded dynamically -->
+                    <div class="loader"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-preview">
+            <div class="container">
+                <h2>About Campus Cafe</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Campus Cafe is your go-to dining spot on campus, serving fresh and affordable meals that fuel your academic success.</p>
+                        <p>Whether you need a quick breakfast before class, a hearty lunch between lectures, or a coffee break with friends, we've got you covered.</p>
+                        <a href="about.html" class="btn btn-secondary">Learn More About Us</a>
+                    </div>
+                    <div class="about-image">
+                        <div class="image-placeholder">
+                            <i class="fas fa-utensils"></i>
+                            <span>Our Cafe</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="hours-location">
+            <div class="container">
+                <div class="hours-location-grid">
+                    <div class="hours-box">
+                        <h2>Hours</h2>
+                        <ul>
+                            <li><strong>Monday - Friday:</strong> 7:30am - 8:00pm</li>
+                            <li><strong>Saturday:</strong> 9:00am - 6:00pm</li>
+                            <li><strong>Sunday:</strong> 10:00am - 4:00pm</li>
+                        </ul>
+                    </div>
+                    <div class="location-box">
+                        <h2>Find Us</h2>
+                        <p><i class="fas fa-map-marker-alt"></i> Student Center, Building B</p>
+                        <p><i class="fas fa-phone"></i> 0712345678</p>
+                        <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="stats-section">
+                <h3 class="stats-title">Our Impact</h3>
+                <div class="stats-container">
+                    <div class="stat-item">
+                        <span class="stat-label">Customers Served Today</span>
+                        <span id="customers-today">38</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Total Customers Served</span>
+                        <span id="customers-total">18,540</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Orders Completed</span>
+                        <span id="orders-count">22,098</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="my-orders.html">My Orders</a></li>
+                </ul>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Campus Cafe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/utils/theme.js"></script>
+    <script src="js/utils/storage.js"></script>
+    <script src="js/utils/stats.js"></script>
+    <script>
+        // Update the cart badge on page load and periodically
+        document.addEventListener('DOMContentLoaded', function() {
+            // Update cart badge immediately
+            updateCartBadgeGlobal();
+            
+            // Update cart badge periodically to ensure it stays updated
+            setInterval(updateCartBadgeGlobal, 2000);
+            
+            // Function to update the cart badge
+            function updateCartBadgeGlobal() {
+                const cartBadge = document.getElementById('cart-badge');
+                if (!cartBadge) return;
+                
+                // Get the total items from cartManager
+                const totalItems = cartManager.getTotalItems();
+                
+                // Update the badge
+                cartBadge.textContent = totalItems;
+                
+                // Show or hide badge based on cart contents
+                if (totalItems > 0) {
+                    cartBadge.style.display = 'flex';
+                } else {
+                    cartBadge.style.display = 'none';
+                }
+            }
+            
+            // Also update the badge when the storage changes (helps with syncing across tabs)
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'campus_cafe_cart') {
+                    updateCartBadgeGlobal();
+                }
+            });
+        });
+    </script>
+    <script src="js/main.js"></script>
+</body>
+</html>

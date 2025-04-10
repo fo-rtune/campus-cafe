@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Login - Campus Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="icon" href="../icon1.png" type="image/png">
+    <style>
+        .admin-login-card {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .input-icon {
+            position: relative;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+            border-radius: var(--border-radius);
+        }
+        
+        .input-icon:focus-within {
+            box-shadow: 0 0 0 2px rgba(190, 0, 39, 0.25);
+        }
+        
+        .input-icon input {
+            width: 100%;
+            padding: 0.75rem 2.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            background-color: var(--background-color);
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .input-icon input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .login-header {
+            margin-bottom: 2rem;
+        }
+        
+        .login-header h1 {
+            color: var(--primary-color);
+            margin-top: 1rem;
+        }
+        
+        .login-info {
+            background-color: var(--background-secondary);
+            padding: 0.75rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        .login-info p {
+            margin: 0;
+            color: var(--text-light);
+        }
+        
+        .btn-primary {
+            padding: 0.75rem;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="admin-body light-mode">
+    <div class="admin-container">
+        <div class="admin-login-card">
+            <div class="login-header">
+                <img src="../assets/logo.png" alt="Campus Cafe Logo" class="login-logo">
+                <h1>Admin Login</h1>
+            </div>
+            
+            <div id="login-error" class="error-message" style="display: none;"></div>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <div class="input-icon">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required autocomplete="username">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="input-icon">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" required autocomplete="current-password">
+                        <i class="fas fa-eye toggle-password"></i>
+                    </div>
+                </div>
+                
+                <div class="login-info">
+                    <p><i class="fas fa-info-circle"></i> Default login: admin@campuscafe.com / admin123</p>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fas fa-sign-in-alt"></i> Login
+                </button>
+            </form>
+            
+            <div class="login-footer">
+                <a href="../index.html">Back to Website</a>
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/utils/theme.js"></script>
+    <script src="../js/utils/storage.js"></script>
+    <script src="../js/utils/config.js"></script>
+    <script src="../js/utils/auth.js"></script>
+    <script src="../js/admin/login.js"></script>
+</body>
+</html>

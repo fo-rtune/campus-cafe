@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Dashboard - Campus Cafe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="icon" href="../icon1.png" type="image/png">
+</head>
+<body class="admin-body light-mode">
+    <div class="admin-wrapper">
+        <nav class="admin-sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/logo.png" alt="Campus Cafe Logo">
+                <h2>Admin Panel</h2>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+                </li>
+                <li>
+                    <a href="manage-menu.html"><i class="fas fa-utensils"></i> Manage Menu</a>
+                </li>
+                <li>
+                    <a href="config.html"><i class="fas fa-cog"></i> Configuration</a>
+                </li>
+                <li>
+                    <a href="#" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <div class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <a href="../index.html" target="_blank" class="view-site">
+                    <i class="fas fa-external-link-alt"></i> View Site
+                </a>
+            </div>
+        </nav>
+        
+        <main class="admin-content">
+            <header class="admin-header">
+                <div class="header-title">
+                    <h1>Dashboard</h1>
+                    <p>Welcome back, <span id="admin-name">Admin</span></p>
+                </div>
+                <div class="header-actions">
+                    <button id="mobile-menu-toggle" class="mobile-toggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </header>
+            
+            <div class="dashboard-container">
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-hamburger"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Menu Items</h3>
+                            <p id="total-menu-items">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-list"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Categories</h3>
+                            <p id="total-categories">4</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Orders</h3>
+                            <p id="total-orders">0</p>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Total Revenue</h3>
+                            <p id="total-revenue">$0.00</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-sections">
+                    <div class="dashboard-section">
+                        <h2>Recent Orders</h2>
+                        <div class="recent-orders-container">
+                            <table class="admin-table" id="recent-orders-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Item</th>
+                                        <th>Total</th>
+                                        <th>Status</th>
+                                        <th>Date</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recent-orders-body">
+                                    <!-- Orders will be loaded dynamically -->
+                                </tbody>
+                            </table>
+                            <div id="no-orders-message" class="empty-state">
+                                <i class="fas fa-shopping-cart"></i>
+                                <p>No orders yet</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-section">
+                        <h2>Menu Overview</h2>
+                        <div class="menu-stats">
+                            <div class="category-stat" data-category="appetizers">
+                                <h3>Breakfast</h3>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <p>0 items</p>
+                            </div>
+                            <div class="category-stat" data-category="main-courses">
+                                <h3>Main Courses</h3>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <p>0 items</p>
+                            </div>
+                            <div class="category-stat" data-category="desserts">
+                                <h3>Desserts</h3>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <p>0 items</p>
+                            </div>
+                            <div class="category-stat" data-category="drinks">
+                                <h3>Drinks</h3>
+                                <div class="progress-bar">
+                                    <div class="progress" style="width: 0%"></div>
+                                </div>
+                                <p>0 items</p>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-actions">
+                            <a href="manage-menu.html" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Add New Menu Item
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-sections">
+                    <div class="dashboard-section">
+                        <h2>Website Images</h2>
+                        <p>The following sections allow customization of website images:</p>
+                        <div class="image-management">
+                            <div class="image-manager-link">
+                                <h3>Menu Items</h3>
+                                <p>Edit individual menu item images</p>
+                                <a href="manage-menu.html" class="btn btn-secondary">Manage Menu Items</a>
+                            </div>
+                            <div class="image-info">
+                                <h3>Image Guidelines</h3>
+                                <ul>
+                                    <li>Use high-quality, well-lit images</li>
+                                    <li>Recommended size: 800x600 pixels</li>
+                                    <li>Use .jpg or .png formats for best compatibility</li>
+                                    <li>Use web-optimized images (under 500KB) for better performance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="../js/utils/theme.js"></script>
+    <script src="../js/utils/storage.js"></script>
+    <script src="../js/utils/config.js"></script>
+    <script src="../js/utils/auth.js"></script>
+    <script src="../js/admin/dashboard.js"></script>
+</body>
+</html>
